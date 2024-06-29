@@ -1,6 +1,7 @@
 package com.alex.ScreenMatch.principal;
 
 import com.alex.ScreenMatch.model.*;
+import com.alex.ScreenMatch.repository.SerieRepository;
 import com.alex.ScreenMatch.service.ConsumoAPI;
 import com.alex.ScreenMatch.service.ConvierteDatos;
 
@@ -21,6 +22,11 @@ public class Principal {
     private final String API_KEY = "&apikey=4966728d";
     private ConvierteDatos conversor = new ConvierteDatos();
     private List<DatosSerie> datosSeries = new ArrayList<>();
+    private SerieRepository repositorio;
+
+    public Principal(SerieRepository repository) {
+        this.repositorio = repository;
+    }
 
     public void muestraElMenu(){
         var opcion = -1;
@@ -160,7 +166,9 @@ public class Principal {
 
     private void buscarSerieWeb(){
         DatosSerie datos = getDatosSerie();
-        datosSeries.add(datos);
+        //datosSeries.add(datos);
+        Serie serie = new Serie(datos);
+        repositorio.save(serie); // guardar
         System.out.println(datos);
 
     }

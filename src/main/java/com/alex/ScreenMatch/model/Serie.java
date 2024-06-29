@@ -4,6 +4,7 @@ import com.alex.ScreenMatch.service.ConsultaChatGPT;
 import com.fasterxml.jackson.annotation.JsonAlias;
 import jakarta.persistence.*;
 
+import java.util.List;
 import java.util.Optional;
 
 @Entity // indica que Serie sera una tabla en la DB
@@ -21,6 +22,8 @@ public class Serie {
     private Categoria genero;
     private String actores;
     private String sinopsis;
+    @Transient // indica que existen episodios, pero au no se usaran
+    private List<Episodio> episodios;
 
     public Serie(DatosSerie datosSerie){
         this.titulo = datosSerie.titulo();
