@@ -19,7 +19,7 @@ public class Principal {
     private ConsumoAPI consumoApi = new ConsumoAPI();
 
     private final String API_BASE = "https://www.omdbapi.com/?t=";
-    private final String API_KEY = System.getenv().get("OMDB_API"); // USANDO VARIABLES DE ENTORNO
+    private final String API_KEY = "&apikey="+System.getenv().get("OMDB_API"); // USANDO VARIABLES DE ENTORNO
     private ConvierteDatos conversor = new ConvierteDatos();
     private List<DatosSerie> datosSeries = new ArrayList<>();
     private SerieRepository repositorio;
