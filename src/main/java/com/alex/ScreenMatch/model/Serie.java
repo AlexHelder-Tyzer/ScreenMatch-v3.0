@@ -25,6 +25,10 @@ public class Serie {
     @Transient // indica que existen episodios, pero au no se usaran
     private List<Episodio> episodios;
 
+    public Serie(){
+        // COnstructor predeterminado que es necesario para JPA
+    }
+
     public Serie(DatosSerie datosSerie){
         this.titulo = datosSerie.titulo();
         this.totalDeTemporadas = datosSerie.totalDeTemporadas();
