@@ -16,6 +16,5 @@ public class ScreenMatchApplication implements CommandLineRunner {
 	public void run(String... args) throws Exception {
 		Principal principal = new Principal();
 		principal.muestraElMenu();
-
 	}
 }

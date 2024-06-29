@@ -2,14 +2,22 @@ package com.alex.ScreenMatch.model;
 
 import com.alex.ScreenMatch.service.ConsultaChatGPT;
 import com.fasterxml.jackson.annotation.JsonAlias;
+import jakarta.persistence.*;
 
 import java.util.Optional;
 
+@Entity // indica que Serie sera una tabla en la DB
+@Table(name="series") // cambiar el nombre de la tabla en la DB
 public class Serie {
+    @Id // indicar que sera la clave primaria
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // forma como sera generado la clave promaria
+    private Long id;
+    @Column(unique = true) // Los nombres de seria sea unicos
     private String titulo;
     private Integer totalDeTemporadas;
     private Double evaluacion;
     private String poster;
+    @Enumerated(EnumType.STRING) // utilizamos categorias con un enum
     private Categoria genero;
     private String actores;
     private String sinopsis;
@@ -22,6 +30,14 @@ public class Serie {
         this.genero = Categoria.fromString(datosSerie.genero().split(",")[0]);
         this.actores = datosSerie.actores();
         this.sinopsis = datosSerie.sinopsis();//ConsultaChatGPT.obtenerTraduccion(datosSerie.sinopsis());
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getTitulo() {
