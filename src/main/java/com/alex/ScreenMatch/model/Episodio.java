@@ -1,14 +1,27 @@
 package com.alex.ScreenMatch.model;
 
+import jakarta.persistence.*;
+
 import java.time.DateTimeException;
 import java.time.LocalDate;
 
+@Entity
+@Table(name = "episodios")
 public class Episodio {
+    @Id // indicar que sera la clave primaria
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // forma como sera generado la clave primaria
+    private Long id;
     private Integer temporada;
     private String titulo;
     private Integer numeroEpisodio;
     private Double evaluacion;
     private LocalDate fechaDeLanzamiento;
+    @ManyToOne
+    private Serie serie;
+
+    public Episodio(){
+
+    }
 
     public Episodio(Integer numero, DatosEpisodio d){
         this.temporada = numero;
@@ -24,6 +37,14 @@ public class Episodio {
         }catch(DateTimeException e){
             this.fechaDeLanzamiento = null;
         }
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public Integer getTemporada() {
@@ -64,6 +85,14 @@ public class Episodio {
 
     public void setFechaDeLanzamiento(LocalDate fechaDeLanzamiento) {
         this.fechaDeLanzamiento = fechaDeLanzamiento;
+    }
+
+    public Serie getSerie() {
+        return serie;
+    }
+
+    public void setSerie(Serie serie) {
+        this.serie = serie;
     }
 
     @Override
