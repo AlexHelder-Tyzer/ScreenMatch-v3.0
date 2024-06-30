@@ -26,4 +26,7 @@ public interface SerieRepository extends JpaRepository<Serie, Long> {
     //Optional<Episodio> findTop1ByTituloContainsIgnoreCase(String nombreEpisodio);
     @Query("SELECT e FROM Serie s JOIN s.episodios e WHERE e.titulo ILIKE %:nombreEpisodio")
     List<Episodio> episodiosPorNombre(String nombreEpisodio);
+
+    @Query("SELECT e FROM Serie s JOIN s.episodios e WHERE s = :serie ORDER BY e.evaluacion DESC LIMIT 5")
+    List<Episodio> top5MejoresEpisodiosPorSerie(Serie serie);
 }
