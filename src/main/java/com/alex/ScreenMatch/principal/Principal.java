@@ -8,6 +8,7 @@ import com.alex.ScreenMatch.service.ConvierteDatos;
 import org.springframework.cglib.core.Local;
 
 import javax.xml.transform.Source;
+import java.sql.SQLOutput;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
@@ -40,6 +41,7 @@ public class Principal {
                 4. Buscar series por titulo
                 5. Top 5 mejores series
                 6. Buscar series por categoria
+                7. Filtrar series por temporadas y evaluacion
                 
                 0. Salir
                 """;
@@ -65,6 +67,9 @@ public class Principal {
                     break;
                 case 6:
                     buscarSeriesPorCategoria();
+                    break;
+                case 7:
+                    filtrarSeriesPorTemporadaEvaluacion();
                     break;
                 case 0:
                     System.out.println("Cerrando la palicacion!!");
@@ -235,6 +240,17 @@ public class Principal {
         List<Serie> seriesPorCategoria = repositorio.findByGenero(categoria);
         System.out.println("Las series de la categoria " + genero);
         seriesPorCategoria.forEach(System.out::println);
+    }
+
+    // modulo reto
+    private void filtrarSeriesPorTemporadaEvaluacion(){
+        System.out.println("Ingrese la cantida de temporadas: ");
+        var temp = teclado.nextInt();
+        System.out.println("Ingrese la Evaluacion: ");
+        var evaluacion = teclado.nextDouble();
+        List<Serie> seriesPorTemporadaYEvaluacion = repositorio.findByTotalDeTemporadasLessThanEqualAndEvaluacionGreaterThanEqual(temp, evaluacion);
+        System.out.println("las series con temporadas <= " + temp + "y evaluacion <= " +evaluacion + "son: ");
+        seriesPorTemporadaYEvaluacion.forEach(System.out::println);
     }
 
 
