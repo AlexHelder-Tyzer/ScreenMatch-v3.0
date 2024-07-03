@@ -26,7 +26,6 @@ public class Principal {
     private SerieRepository repositorio;
     private List<Serie> series;
     private Optional<Serie> serieBuscada;
-
     public Principal(SerieRepository repository) {
         this.repositorio = repository;
     }
