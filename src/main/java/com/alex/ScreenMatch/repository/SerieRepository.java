@@ -1,5 +1,6 @@
 package com.alex.ScreenMatch.repository;
 
+import com.alex.ScreenMatch.dto.EpisodioDTO;
 import com.alex.ScreenMatch.model.Categoria;
 import com.alex.ScreenMatch.model.Episodio;
 import com.alex.ScreenMatch.model.Serie;
@@ -33,4 +34,6 @@ public interface SerieRepository extends JpaRepository<Serie, Long> {
     @Query("SELECT s FROM Serie s JOIN s.episodios e GROUP BY s  ORDER BY MAX(e.fechaDeLanzamiento) DESC LIMIT 5")
     List<Serie> lanzamientosMasRecientes();
 
+    @Query("SELECT e FROM Serie s JOIN s.episodios e WHERE s.id = :id AND e.temporada = :numeroDeTemporada")
+    List<Episodio> ontenerTemporadasPorNumero(Long id, Long numeroDeTemporada);
 }
