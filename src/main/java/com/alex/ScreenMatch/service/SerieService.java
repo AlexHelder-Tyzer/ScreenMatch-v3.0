@@ -2,6 +2,7 @@ package com.alex.ScreenMatch.service;
 
 import com.alex.ScreenMatch.dto.EpisodioDTO;
 import com.alex.ScreenMatch.dto.SerieDTO;
+import com.alex.ScreenMatch.model.Categoria;
 import com.alex.ScreenMatch.model.Serie;
 import com.alex.ScreenMatch.repository.SerieRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -88,5 +89,10 @@ public class SerieService {
                         e.getTitulo(),
                         e.getNumeroEpisodio()))
                 .collect(Collectors.toList());
+    }
+
+    public List<SerieDTO> obtenerSeriesPorCategoria(String nombreGenero) {
+        Categoria categoria = Categoria.fromEspanhol(nombreGenero);
+        return convierteDatos(repository.findByGenero(categoria));
     }
 }

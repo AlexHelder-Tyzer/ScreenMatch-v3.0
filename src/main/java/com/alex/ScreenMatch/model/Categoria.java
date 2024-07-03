@@ -32,5 +32,4 @@ public enum Categoria {
         }
         throw new IllegalArgumentException("Ninguna categoria fie encontrada " + texto);
     }
-
 }
